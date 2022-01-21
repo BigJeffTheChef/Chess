@@ -3,27 +3,31 @@ package model;
 public abstract class Piece {
 
 	// Fields
-	
-	private static int pieceCounter = 0;
-	private int pieceNumber;
+
+	private static int whitePieceCounter = 0;
+	private static int blackPieceCounter = 0;
 
 	// Constructor
-	
-	public Piece() {
-		this.setPieceNumber();
+
+	public Piece(int team) {
+		this.addPieceNum(team);
 	}
-	
+
 	// Abstract Methods
-	
+
 	public abstract boolean checkMoveValidity();
-	
+
 	// Getters and Setters
-	
-	public void setPieceNumber() {
-		this.pieceNumber = ++pieceCounter;
-	}
-	
-	public int getPieceNumber() {
-		return this.getPieceNumber();
+
+	/**
+	 * add this piece to the count of this teams piece
+	 * @param team
+	 */
+	private void addPieceNum(int team) {
+		if (team == 0) {
+			blackPieceCounter++;
+		} else {
+			whitePieceCounter++;
+		}
 	}
 }
