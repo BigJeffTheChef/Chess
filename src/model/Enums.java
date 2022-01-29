@@ -26,7 +26,16 @@ public class Enums {
 		
 	}
 	
-	public enum BoardSetup {
+	public enum Type {
+		PAWN,
+		ROOK,
+		BISHOP,
+		KNIGHT,
+		QUEEN,
+		KING;
+	}
+	
+	public enum Layout {
 		NORMAL;
 	}
 	
