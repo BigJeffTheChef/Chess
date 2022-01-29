@@ -9,7 +9,8 @@ public class King extends Piece {
 
 	// Constructor
 
-	public King() {
+	public King(int team) {
+		super(team);
 		this.setKingNumber();
 	}
 

@@ -1,10 +1,14 @@
 package model;
 
+import java.util.Hashtable;
+
+import model.Enums.Team;
+
 public class Model {
 
 	// Fields
 
-	private Piece[][] board = new Piece[8][8];
+	private Hashtable<String,Piece>board = new Hashtable<>(64);
 
 	// Constructor
 
@@ -14,8 +18,10 @@ public class Model {
 
 	// Getters and Setters
 
-	public void setBoard() {
-		//TODO set pieces on board
+	public void setBoard(Team team) {
+		if (team == WHITE) {
+			
+		}
 	}
 
 }

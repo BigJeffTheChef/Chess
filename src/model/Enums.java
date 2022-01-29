@@ -2,17 +2,25 @@ package model;
 
 public class Enums {
 	public enum Team {
-		BLACK(0),
-		WHITE(1);
+		BLACK(0, "Black"),
+		WHITE(1, "White");
 
-		private int teamNumber;
+		private int number;
+		private String name;
 
-		private Team(int team) {
-			this.teamNumber = team;
+		private Team(int team, String name) {
+			this.number = team;
+			this.name = name;
 		}
 
-		public int value() {
-			return this.teamNumber;
+		public int getTeamNumber() {
+			return this.number;
 		}
+		
+		public String getTeamName() {
+			return this.name;
+		}
+		
+		
 	}
 }
