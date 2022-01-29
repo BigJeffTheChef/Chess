@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Hashtable;
+
 public class Enums {
 	public enum Team {
 		BLACK(0, "Black"),
@@ -12,7 +14,7 @@ public class Enums {
 			this.number = team;
 			this.name = name;
 		}
-
+		
 		public int getTeamNumber() {
 			return this.number;
 		}
@@ -23,4 +25,9 @@ public class Enums {
 		
 		
 	}
+	
+	public enum BoardSetup {
+		NORMAL;
+	}
+	
 }

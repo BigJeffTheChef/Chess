@@ -18,7 +18,7 @@ public class King extends Piece {
 
 	@Override
 	public boolean checkMoveValidity() {
-		// TODO Auto-generated method stub
+		// TODO checkMoveValidity() KING
 		return false;
 	}
 
