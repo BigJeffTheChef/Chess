@@ -56,7 +56,7 @@ public class Controller {
 	/**
 	 * @param v the v to set
 	 */
-	public static void setView() throws NullPointerException {
+	public static void setView() {
 		view = new View();
 	}
 

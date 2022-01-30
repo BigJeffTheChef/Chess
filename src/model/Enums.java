@@ -14,18 +14,18 @@ public class Enums {
 			this.number = team;
 			this.name = name;
 		}
-		
+
 		public int getTeamNumber() {
 			return this.number;
 		}
-		
+
 		public String getTeamName() {
 			return this.name;
 		}
-		
-		
+
+
 	}
-	
+
 	public enum Type {
 		PAWN,
 		ROOK,
@@ -34,9 +34,20 @@ public class Enums {
 		QUEEN,
 		KING;
 	}
-	
+
 	public enum Layout {
-		NORMAL;
+		NORMAL(8);
+
+		private int boardWidth;
+
+		private Layout(int width) {
+			this.boardWidth = width;
+		}
+
+		public int getWidth() {
+			return this.boardWidth;
+		}
+
 	}
-	
+
 }

@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Hashtable;
 
 import model.Enums.Layout;
@@ -9,74 +10,201 @@ import model.pieces.*;
 
 public class Model {
 
-	private Hashtable<String, APiece> board;
+	private Hashtable<int[], APiece> board;
 	private ArrayList<APiece> captured;
+	private Layout layout;
+	private String[] teamNames;
 
 	///////////////////////////////////////////////////
 	// CONSTRUCTOR									//
 	/////////////////////////////////////////////////
-	
+
 	/**
 	 * Instantiates a (chessboard) Model object.
 	 * @param layout
 	 */
-	public Model(Layout layout) {
-		if (layout == null) {
-			throw new NullPointerException("Model constructor does not accept null arguments");
-		}
-		this.setBoard(layout);
+	public Model(Layout layout) throws NullPointerException, IllegalArgumentException {
+		this.setLayout(layout);
+		this.setBoard();
 		this.captured = new ArrayList<APiece>(32);
+		this.setTeamNames("Black Name Unset", "White Name Unset");
+	}
+
+	///////////////////////////////////////////////////
+	// OPERATIONS									//
+	/////////////////////////////////////////////////
+
+	private void capture(int[] coord) throws NullPointerException {
+		APiece capturedPiece = board.get(coord);
+		if (capturedPiece == null) {
+			throw new NullPointerException("Board Square " + Arrays.toString(coord) + " was null!");
+		}
+		captured.add(capturedPiece);
+		board.remove(coord);
+	}
+
+	/**
+	 * Add APiece to the board with an {@code int[2]} coordinate
+	 * @param coord An int[2] - board coordinate, e.g. [0,0] - [7,7]
+	 * @param piece - an APiece object
+	 */
+	public void addAPieceToBoard(int[] coord, APiece piece) {
+		board.put(coord, piece);
+	}
+
+	/**
+	 * Add APiece to the board with an {@code int[2]} coordinate
+	 * @param coord A String - board coordinate eg, "A1" - "H8"
+	 * @param piece - an APiece object
+	 */
+	public void addAPieceToBoard(String coord, APiece piece) {
+		addAPieceToBoard(convertCoords(coord), piece);
+	}
+
+	///////////////////////////////////////////////////
+	// UTILITY										//
+	/////////////////////////////////////////////////
+	
+	/**
+	 * Convert a String representation of a board square to an int[2].<br>
+	 * A1 -> [0,0]
+	 * 
+	 * @param s - A string representing a board square A-H / 1-8
+	 * @return an int[2] representing the board position, e.g. [0,0]
+	 * @throws IllegalArgumentException - if s.length() not 2, if s.charAt(0) not A-Z; if s.charAt(1) not 1-7.
+	 */
+	public static int[] convertCoords(String s) throws IllegalArgumentException {
+		s = s.toUpperCase();
+		if (s.length() != 2 || s.charAt(0) < 'A' || s.charAt(0) > 'H' || s.charAt(1) < '1' || s.charAt(1) > '7') {
+			throw new IllegalArgumentException("Model.convertCoord(String) allows String length 2 only; charAt(0) A-H, and charAt(1) 1-7 only");
+		}
+		return new int[] { s.charAt(1) - 49, s.charAt(0) - 65 };
+	}
+
+	/**
+	 * Convert an int[2] representation of a board square to a String.<br>
+	 * [0,0] -> A1
+	 * 
+	 * @param c - An int[2] representing a board square [0-7,0-7]
+	 * @return A String representing the board position, e.g. A1
+	 * @throws IllegalArgumentException if c.length not 2; if c[0] not 0-7; if c[1] not 0-7.
+	 */
+	public static String convertCoords(int[] c) {
+		if (c == null || c.length != 2 || c[0] < 0 || c[0] > 7 || c[1] < 0 || c[1] > 7) {
+			throw new IllegalArgumentException(
+					"Model.convertCoord(int[]) allows only an int[2]; int[0] 0-7, int[1] 0-7 only but was " + Arrays.toString(c));
+		}
+		return String.format("%c%c", (char) (c[1] + 65), (char) c[0] + 49);
 	}
 
 	///////////////////////////////////////////////////
 	// GETTERS N SETTERS							//
 	/////////////////////////////////////////////////
-	
+
+	/**
+	 * @return {@code ArrayList<APiece>} containing all captured APieces
+	 */
+	public ArrayList<APiece> getCaptured() {
+		return this.captured;
+	}
+
+	/**
+	 * @return A String[2] - The team names
+	 */
+	public String[] getTeamNames() {
+		return this.teamNames;
+	}
+
+	/**
+	 * Set the team names
+	 * @param teamBlackName
+	 * @param teamWhiteName
+	 * @throws NullPointerException if either argument is null
+	 * @throws IllegalArgumentException if either argument is a blank String (only white space or empty)
+	 */
+	private void setTeamNames(String teamBlackName, String teamWhiteName) throws NullPointerException, IllegalArgumentException {
+		if (teamBlackName == null || teamWhiteName == null) {
+			throw new NullPointerException("Model.setTeamNames(String, String) does not accept null arguments");
+		} else if (teamBlackName.isBlank() || teamWhiteName.isBlank()) {
+			throw new IllegalArgumentException("Model.setTeamNames(String, String) does not accept blank String arguments");
+		} else {
+			this.teamNames = new String[] { teamBlackName, teamWhiteName };
+		}
+	}
+
+	/**
+	 * @return a Layout. The Layout of this object.
+	 */
+	public Layout getLayout() {
+		return this.layout;
+	}
+
+	/**
+	 * Set the layout field of this object
+	 * @param layout
+	 * @throws NullPointerException if layout if null
+	 */
+	private void setLayout(Layout layout) throws NullPointerException {
+		if (layout == null) {
+			throw new NullPointerException("Model.setLayout(layout) does not accept null arguments");
+		}
+		this.layout = layout;
+	}
+
+	/**
+	 * @return a {@code Hashtable<String, APiece>} containing all the {@code APiece}'s positions
+	 */
+	public Hashtable<int[], APiece> getBoard() {
+		return this.board;
+	}
+
 	/**
 	 * Set the chessboard up.
 	 * @param setup
 	 */
-	public void setBoard(Layout setup) {
-		board = new Hashtable<String, APiece>(32);
-		switch (setup) {
+	private void setBoard() {
+		board = new Hashtable<int[], APiece>(32);
+		switch (this.layout) {
 		case NORMAL:
-			board.put("A1", new Rook(Team.WHITE));
-			board.put("B1", new Knight(Team.WHITE));
-			board.put("C1", new Bishop(Team.WHITE));
-			board.put("D1", new King(Team.WHITE));
-			board.put("E1", new Queen(Team.WHITE));
-			board.put("F1", new Bishop(Team.WHITE));
-			board.put("G1", new Knight(Team.WHITE));
-			board.put("H1", new Rook(Team.WHITE));
+			addAPieceToBoard("A1", new Rook(Team.WHITE));
+			addAPieceToBoard("B1", new Knight(Team.WHITE));
+			addAPieceToBoard("C1", new Bishop(Team.WHITE));
+			addAPieceToBoard("D1", new King(Team.WHITE));
+			addAPieceToBoard("E1", new Queen(Team.WHITE));
+			addAPieceToBoard("F1", new Bishop(Team.WHITE));
+			addAPieceToBoard("G1", new Knight(Team.WHITE));
+			addAPieceToBoard("H1", new Rook(Team.WHITE));
 
-			board.put("A2", new Pawn(Team.WHITE));
-			board.put("B2", new Pawn(Team.WHITE));
-			board.put("C2", new Pawn(Team.WHITE));
-			board.put("D2", new Pawn(Team.WHITE));
-			board.put("E2", new Pawn(Team.WHITE));
-			board.put("F2", new Pawn(Team.WHITE));
-			board.put("G2", new Pawn(Team.WHITE));
+			addAPieceToBoard("A2", new Pawn(Team.WHITE));
+			addAPieceToBoard("B2", new Pawn(Team.WHITE));
+			addAPieceToBoard("C2", new Pawn(Team.WHITE));
+			addAPieceToBoard("D2", new Pawn(Team.WHITE));
+			addAPieceToBoard("E2", new Pawn(Team.WHITE));
+			addAPieceToBoard("F2", new Pawn(Team.WHITE));
+			addAPieceToBoard("G2", new Pawn(Team.WHITE));
 
-			board.put("A7", new Pawn(Team.BLACK));
-			board.put("B7", new Pawn(Team.BLACK));
-			board.put("C7", new Pawn(Team.BLACK));
-			board.put("D7", new Pawn(Team.BLACK));
-			board.put("E7", new Pawn(Team.BLACK));
-			board.put("F7", new Pawn(Team.BLACK));
-			board.put("G7", new Pawn(Team.BLACK));
+			addAPieceToBoard("A7", new Pawn(Team.BLACK));
+			addAPieceToBoard("B7", new Pawn(Team.BLACK));
+			addAPieceToBoard("C7", new Pawn(Team.BLACK));
+			addAPieceToBoard("D7", new Pawn(Team.BLACK));
+			addAPieceToBoard("E7", new Pawn(Team.BLACK));
+			addAPieceToBoard("F7", new Pawn(Team.BLACK));
+			addAPieceToBoard("G7", new Pawn(Team.BLACK));
 
-			board.put("A8", new Rook(Team.BLACK));
-			board.put("B8", new Knight(Team.BLACK));
-			board.put("C8", new Bishop(Team.BLACK));
-			board.put("D8", new King(Team.BLACK));
-			board.put("E8", new Queen(Team.BLACK));
-			board.put("F8", new Bishop(Team.BLACK));
-			board.put("G8", new Knight(Team.BLACK));
-			board.put("H8", new Rook(Team.BLACK));
+			addAPieceToBoard("A8", new Rook(Team.BLACK));
+			addAPieceToBoard("B8", new Knight(Team.BLACK));
+			addAPieceToBoard("C8", new Bishop(Team.BLACK));
+			addAPieceToBoard("D8", new King(Team.BLACK));
+			addAPieceToBoard("E8", new Queen(Team.BLACK));
+			addAPieceToBoard("F8", new Bishop(Team.BLACK));
+			addAPieceToBoard("G8", new Knight(Team.BLACK));
+			addAPieceToBoard("H8", new Rook(Team.BLACK));
 
 			break;
 		default:
 			throw new NullPointerException("Layout must be set");
 		}
 	}
+
+
 }
