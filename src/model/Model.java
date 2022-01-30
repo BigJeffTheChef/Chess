@@ -24,13 +24,20 @@ public class Model {
 	 * @param layout
 	 */
 	public Model(Layout layout) throws InstantiationError {
+		String errorMsg = null;
 		try {
 			this.setLayout(layout);
 			this.captured = new ArrayList<APiece>(32);
 			this.setTeamNames("Black Name Unset", "White Name Unset");
 			this.setBoard();
-		} catch (Exception e) {
-			throw new InstantiationError("Model was not successfully Instantiated: \"" + e.getMessage() + "\"");
+		} catch (NullPointerException e) {
+			errorMsg = "NullPointerException: " + e.getMessage();
+		} catch (IllegalArgumentException e) {
+			errorMsg = "IllegalArgumentException: " + e.getMessage();
+		} finally {
+			if (errorMsg != null) {
+				throw new InstantiationError(String.format("Model was not successully Instantiated:%n\t" + errorMsg));
+			}
 		}
 	}
 
@@ -38,6 +45,11 @@ public class Model {
 	// OPERATIONS									//
 	/////////////////////////////////////////////////
 
+	/**
+	 * Capture a piece at coordinate
+	 * @param coord
+	 * @throws NullPointerException if APiece at coordinate coord is null
+	 */
 	private void capture(int[] coord) throws NullPointerException {
 		APiece capturedPiece = board.get(coord);
 		if (capturedPiece == null) {
@@ -51,8 +63,18 @@ public class Model {
 	 * Add APiece to the board with an {@code int[2]} coordinate
 	 * @param coord An int[2] - board coordinate, e.g. [0,0] - [7,7]
 	 * @param piece - an APiece object
+	 * @throws IllegalArgumentException if any coord argument element is outside range 0-7 inclusive
+	 * @throw NullPointerException if piece or coord arguments are null
 	 */
-	public void addAPieceToBoard(int[] coord, APiece piece) {
+	public void addAPieceToBoard(int[] coord, APiece piece) throws IllegalArgumentException, NullPointerException {
+		if (coord == null) {
+			throw new NullPointerException("Model.addPieceToBoard(int[], APiece): int[] arg may not be null.");
+		} else if (piece == null) {
+			throw new NullPointerException("Model.addPieceToBoard(int[], APiece): APiece arg may not be null.");
+		} else if (coord.length != 2 || coord[0] < 0 || coord[0] > 7 || coord[1] < 0 || coord[1] > 7) {
+			throw new IllegalArgumentException(
+					"Model.addPieceToBoard(int[], APiece): int[] elements must only be 0-7 inclusive, but was " + Arrays.toString(coord));
+		}
 		board.put(coord, piece);
 	}
 
@@ -66,7 +88,7 @@ public class Model {
 	}
 
 	///////////////////////////////////////////////////
-	// UTILITY										//
+	// UTILITY					Exception					//
 	/////////////////////////////////////////////////
 
 	/**
@@ -77,13 +99,8 @@ public class Model {
 	 * @return an int[2] representing the board position, e.g. [0,0]
 	 * @throws IllegalArgumentException - if s.length() not 2, if s.charAt(0) not A-Z; if s.charAt(1) not 1-7.
 	 */
-	public int[] convertCoords(String s) throws IllegalArgumentException {
+	public int[] convertCoords(String s) {
 		s = s.toUpperCase();
-		if (s.length() != 2 || s.charAt(0) < 'A' || s.charAt(0) > 'H' || s.charAt(1) < '1' || s.charAt(1) > '8') {
-			throw new IllegalArgumentException(
-					"Model.convertCoord(String) allows String length 2 only; charAt(0) A-H, and charAt(1) 1-8 only but was \"" + s
-							+ "\"");
-		}
 		return new int[] { s.charAt(1) - 49, s.charAt(0) - 65 };
 	}
 
@@ -95,11 +112,7 @@ public class Model {
 	 * @return A String representing the board position, e.g. A1
 	 * @throws IllegalArgumentException if c.length not 2; if c[0] not 0-7; if c[1] not 0-7.
 	 */
-	public String convertCoords(int[] c) throws IllegalArgumentException {
-		if (c == null || c.length != 2 || c[0] < 0 || c[0] > 7 || c[1] < 0 || c[1] > 7) {
-			throw new IllegalArgumentException(
-					"Model.convertCoord(int[]) allows only an int[2]; int[0] 0-7, int[1] 0-7 only but was " + Arrays.toString(c));
-		}
+	public String convertCoords(int[] c) {
 		return String.format("%c%c", (char) (c[1] + 65), (char) c[0] + 49);
 	}
 
@@ -168,10 +181,16 @@ public class Model {
 	 * Set the chessboard up.
 	 * @param setup
 	 */
-	private void setBoard() throws IllegalArgumentException {
+	private void setBoard() {
 		board = new Hashtable<int[], APiece>(32);
 		switch (this.layout) {
 		case NORMAL:
+			//			addAPieceToBoard(new int[] { -1, 0 }, new Rook(Team.WHITE));
+			//			APiece tp = null;
+			//			int[] ti = null;
+			//			addAPieceToBoard("A1", tp);
+			//			addAPieceToBoard(ti, new Rook(Team.WHITE));
+			
 			addAPieceToBoard("A1", new Rook(Team.WHITE));
 			addAPieceToBoard("B1", new Knight(Team.WHITE));
 			addAPieceToBoard("C1", new Bishop(Team.WHITE));
@@ -205,7 +224,6 @@ public class Model {
 			addAPieceToBoard("F8", new Bishop(Team.BLACK));
 			addAPieceToBoard("G8", new Knight(Team.BLACK));
 			addAPieceToBoard("H8", new Rook(Team.BLACK));
-
 			break;
 		default:
 			throw new NullPointerException("Layout must be set");
