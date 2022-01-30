@@ -16,7 +16,7 @@ public class View extends Application {
 	/////////////////////////////////////////////////
 
 	public static void main(String[] args) {
-		Controller.initController(args, Layout.NORMAL);
+		Controller.initController();
 		System.out.println("end of main");
 	}
 	
@@ -24,8 +24,8 @@ public class View extends Application {
 	// Application launch()							//
 	/////////////////////////////////////////////////
 	
-	public static void launchGUI(String[] args) {
-		launch(args);
+	public static void launchGUI() {
+		launch();
 	}
 
 	@Override

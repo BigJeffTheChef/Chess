@@ -185,12 +185,6 @@ public class Model {
 		board = new Hashtable<int[], APiece>(32);
 		switch (this.layout) {
 		case NORMAL:
-			//			addAPieceToBoard(new int[] { -1, 0 }, new Rook(Team.WHITE));
-			//			APiece tp = null;
-			//			int[] ti = null;
-			//			addAPieceToBoard("A1", tp);
-			//			addAPieceToBoard(ti, new Rook(Team.WHITE));
-
 			addAPieceToBoard("A1", new Rook(Team.WHITE));
 			addAPieceToBoard("B1", new Knight(Team.WHITE));
 			addAPieceToBoard("C1", new Bishop(Team.WHITE));
@@ -224,6 +218,13 @@ public class Model {
 			addAPieceToBoard("F8", new Bishop(Team.BLACK));
 			addAPieceToBoard("G8", new Knight(Team.BLACK));
 			addAPieceToBoard("H8", new Rook(Team.BLACK));
+			break;
+		case TESTING:
+			addAPieceToBoard(new int[] { -1, 0 }, new Rook(Team.WHITE));
+			APiece tp = null;
+			int[] ti = null;
+			addAPieceToBoard("A1", tp);
+			addAPieceToBoard(ti, new Rook(Team.WHITE));
 			break;
 		default:
 		}

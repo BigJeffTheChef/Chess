@@ -16,16 +16,18 @@ public class Controller {
 
 	private static Model model;
 	private static View view;
+	
+	private static final Layout LAYOUT = Layout.NORMAL;
 
 	///////////////////////////////////////////////////
 	// CONSTRUCTOR									//
 	/////////////////////////////////////////////////
 
-	public static void initController(String[] args, Layout layout) {
+	public static void initController() {
 		try {
-			setModel(layout);
+			setModel();
 			setView();
-			View.launchGUI(args);
+			View.launchGUI();
 			System.out.println("MVC successfully initialised");
 		} catch (InstantiationError e) {
 			System.err.println("Program MVC initialisation not successful");
@@ -47,8 +49,8 @@ public class Controller {
 	/**
 	 * @param m the m to set
 	 */
-	private static void setModel(Layout layout) {
-		model = new Model(layout);
+	private static void setModel() {
+		model = new Model(LAYOUT);
 	}
 
 	/**
