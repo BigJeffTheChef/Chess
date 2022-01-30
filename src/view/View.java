@@ -12,16 +12,12 @@ import javafx.scene.layout.BorderPane;
 
 public class View extends Application {
 
-//	private static View v;
-//	private static Controller c;
-//	private static Model m;
-
 	///////////////////////////////////////////////////
 	// Application main()							//
 	/////////////////////////////////////////////////
 
 	public static void main(String[] args) {
-		Controller.initController(args);
+		Controller.initController(args, Layout.NORMAL);
 	}
 	
 	///////////////////////////////////////////////////

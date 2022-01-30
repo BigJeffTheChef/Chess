@@ -25,9 +25,9 @@ public class Model {
 	 */
 	public Model(Layout layout) throws NullPointerException, IllegalArgumentException {
 		this.setLayout(layout);
-		this.setBoard();
 		this.captured = new ArrayList<APiece>(32);
 		this.setTeamNames("Black Name Unset", "White Name Unset");
+		this.setBoard();
 	}
 
 	///////////////////////////////////////////////////
@@ -73,9 +73,9 @@ public class Model {
 	 * @return an int[2] representing the board position, e.g. [0,0]
 	 * @throws IllegalArgumentException - if s.length() not 2, if s.charAt(0) not A-Z; if s.charAt(1) not 1-7.
 	 */
-	public static int[] convertCoords(String s) throws IllegalArgumentException {
+	public int[] convertCoords(String s) throws IllegalArgumentException {
 		s = s.toUpperCase();
-		if (s.length() != 2 || s.charAt(0) < 'A' || s.charAt(0) > 'H' || s.charAt(1) < '1' || s.charAt(1) > '7') {
+		if (s.length() != 2 || s.charAt(0) < 'A' || s.charAt(0) > 'H' || s.charAt(1) < '1' || s.charAt(1) > '8') {
 			throw new IllegalArgumentException("Model.convertCoord(String) allows String length 2 only; charAt(0) A-H, and charAt(1) 1-7 only");
 		}
 		return new int[] { s.charAt(1) - 49, s.charAt(0) - 65 };
@@ -89,7 +89,7 @@ public class Model {
 	 * @return A String representing the board position, e.g. A1
 	 * @throws IllegalArgumentException if c.length not 2; if c[0] not 0-7; if c[1] not 0-7.
 	 */
-	public static String convertCoords(int[] c) {
+	public String convertCoords(int[] c) {
 		if (c == null || c.length != 2 || c[0] < 0 || c[0] > 7 || c[1] < 0 || c[1] > 7) {
 			throw new IllegalArgumentException(
 					"Model.convertCoord(int[]) allows only an int[2]; int[0] 0-7, int[1] 0-7 only but was " + Arrays.toString(c));
@@ -162,7 +162,7 @@ public class Model {
 	 * Set the chessboard up.
 	 * @param setup
 	 */
-	private void setBoard() {
+	private void setBoard(){
 		board = new Hashtable<int[], APiece>(32);
 		switch (this.layout) {
 		case NORMAL:

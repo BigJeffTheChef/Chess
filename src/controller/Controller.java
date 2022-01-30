@@ -22,8 +22,8 @@ public class Controller {
 	// CONSTRUCTOR									//
 	/////////////////////////////////////////////////
 	
-	public static void initController(String[] args) {
-		setModel(Layout.NORMAL);
+	public static void initController(String[] args, Layout layout) {
+		setModel(layout);
 		setView();
 		View.launchGUI(args);
 	}
@@ -42,7 +42,7 @@ public class Controller {
 	/**
 	 * @param m the m to set
 	 */
-	public static void setModel(Layout layout) throws NullPointerException {
+	private static void setModel(Layout layout) {
 		model = new Model(layout);
 	}
 
