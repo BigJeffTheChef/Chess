@@ -12,6 +12,10 @@ public class Model {
 	private Hashtable<String, APiece> board;
 	private ArrayList<APiece> captured;
 
+	///////////////////////////////////////////////////
+	// CONSTRUCTOR									//
+	/////////////////////////////////////////////////
+	
 	/**
 	 * Instantiates a (chessboard) Model object.
 	 * @param layout
@@ -24,6 +28,10 @@ public class Model {
 		this.captured = new ArrayList<APiece>(32);
 	}
 
+	///////////////////////////////////////////////////
+	// GETTERS N SETTERS							//
+	/////////////////////////////////////////////////
+	
 	/**
 	 * Set the chessboard up.
 	 * @param setup
