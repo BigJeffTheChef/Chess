@@ -21,17 +21,23 @@ public class Controller {
 	///////////////////////////////////////////////////
 	// CONSTRUCTOR									//
 	/////////////////////////////////////////////////
-	
+
 	public static void initController(String[] args, Layout layout) {
-		setModel(layout);
-		setView();
-		View.launchGUI(args);
+		try {
+			setModel(layout);
+			setView();
+			View.launchGUI(args);
+			System.out.println("MVC successfully initialised");
+		} catch (InstantiationError e) {
+			System.err.println(e.getMessage());
+			System.err.println("Program exiting. Initialisation not successful");
+		}
 	}
 
 	///////////////////////////////////////////////////
 	// GETTERS N SETTERS							//
 	/////////////////////////////////////////////////
-	
+
 	/**
 	 * @return the m
 	 */
@@ -56,7 +62,7 @@ public class Controller {
 	/**
 	 * @param v the v to set
 	 */
-	public static void setView() {
+	public static void setView() throws InstantiationError {
 		view = new View();
 	}
 

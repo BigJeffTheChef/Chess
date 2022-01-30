@@ -23,11 +23,15 @@ public class Model {
 	 * Instantiates a (chessboard) Model object.
 	 * @param layout
 	 */
-	public Model(Layout layout) throws NullPointerException, IllegalArgumentException {
-		this.setLayout(layout);
-		this.captured = new ArrayList<APiece>(32);
-		this.setTeamNames("Black Name Unset", "White Name Unset");
-		this.setBoard();
+	public Model(Layout layout) throws InstantiationError {
+		try {
+			this.setLayout(layout);
+			this.captured = new ArrayList<APiece>(32);
+			this.setTeamNames("Black Name Unset", "White Name Unset");
+			this.setBoard();
+		} catch (Exception e) {
+			throw new InstantiationError("Model was not successfully Instantiated: \"" + e.getMessage() + "\"");
+		}
 	}
 
 	///////////////////////////////////////////////////
@@ -64,7 +68,7 @@ public class Model {
 	///////////////////////////////////////////////////
 	// UTILITY										//
 	/////////////////////////////////////////////////
-	
+
 	/**
 	 * Convert a String representation of a board square to an int[2].<br>
 	 * A1 -> [0,0]
@@ -76,7 +80,9 @@ public class Model {
 	public int[] convertCoords(String s) throws IllegalArgumentException {
 		s = s.toUpperCase();
 		if (s.length() != 2 || s.charAt(0) < 'A' || s.charAt(0) > 'H' || s.charAt(1) < '1' || s.charAt(1) > '8') {
-			throw new IllegalArgumentException("Model.convertCoord(String) allows String length 2 only; charAt(0) A-H, and charAt(1) 1-7 only");
+			throw new IllegalArgumentException(
+					"Model.convertCoord(String) allows String length 2 only; charAt(0) A-H, and charAt(1) 1-8 only but was \"" + s
+							+ "\"");
 		}
 		return new int[] { s.charAt(1) - 49, s.charAt(0) - 65 };
 	}
@@ -89,7 +95,7 @@ public class Model {
 	 * @return A String representing the board position, e.g. A1
 	 * @throws IllegalArgumentException if c.length not 2; if c[0] not 0-7; if c[1] not 0-7.
 	 */
-	public String convertCoords(int[] c) {
+	public String convertCoords(int[] c) throws IllegalArgumentException {
 		if (c == null || c.length != 2 || c[0] < 0 || c[0] > 7 || c[1] < 0 || c[1] > 7) {
 			throw new IllegalArgumentException(
 					"Model.convertCoord(int[]) allows only an int[2]; int[0] 0-7, int[1] 0-7 only but was " + Arrays.toString(c));
@@ -162,7 +168,7 @@ public class Model {
 	 * Set the chessboard up.
 	 * @param setup
 	 */
-	private void setBoard(){
+	private void setBoard() throws IllegalArgumentException {
 		board = new Hashtable<int[], APiece>(32);
 		switch (this.layout) {
 		case NORMAL:
