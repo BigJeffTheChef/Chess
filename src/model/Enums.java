@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Hashtable;
-
 public class Enums {
 	public enum Team {
 		BLACK(0, "Black"),

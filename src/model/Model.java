@@ -9,7 +9,7 @@ import model.Enums.Team;
 import model.pieces.*;
 
 public class Model {
-
+	//TODO make a sing;eton?
 	private Hashtable<int[], APiece> board;
 	private ArrayList<APiece> captured;
 	private Layout layout;
@@ -66,7 +66,7 @@ public class Model {
 	 * @throws IllegalArgumentException if any coord argument element is outside range 0-7 inclusive
 	 * @throw NullPointerException if piece or coord arguments are null
 	 */
-	public void addAPieceToBoard(int[] coord, APiece piece) throws IllegalArgumentException, NullPointerException {
+	private void addAPieceToBoard(int[] coord, APiece piece) throws IllegalArgumentException, NullPointerException {
 		if (coord == null) {
 			throw new NullPointerException("Model.addPieceToBoard(int[], APiece): int[] arg may not be null.");
 		} else if (piece == null) {
@@ -83,12 +83,12 @@ public class Model {
 	 * @param coord A String - board coordinate eg, "A1" - "H8"
 	 * @param piece - an APiece object
 	 */
-	public void addAPieceToBoard(String coord, APiece piece) {
+	private void addAPieceToBoard(String coord, APiece piece) throws IllegalArgumentException, NullPointerException {
 		addAPieceToBoard(convertCoords(coord), piece);
 	}
 
 	///////////////////////////////////////////////////
-	// UTILITY					Exception					//
+	// UTILITY										//
 	/////////////////////////////////////////////////
 
 	/**
@@ -141,7 +141,7 @@ public class Model {
 	 * @throws NullPointerException if either argument is null
 	 * @throws IllegalArgumentException if either argument is a blank String (only white space or empty)
 	 */
-	private void setTeamNames(String teamBlackName, String teamWhiteName) throws NullPointerException, IllegalArgumentException {
+	private void setTeamNames(String teamBlackName, String teamWhiteName) throws IllegalArgumentException, NullPointerException {
 		if (teamBlackName == null || teamWhiteName == null) {
 			throw new NullPointerException("Model.setTeamNames(String, String) does not accept null arguments");
 		} else if (teamBlackName.isBlank() || teamWhiteName.isBlank()) {
@@ -190,7 +190,7 @@ public class Model {
 			//			int[] ti = null;
 			//			addAPieceToBoard("A1", tp);
 			//			addAPieceToBoard(ti, new Rook(Team.WHITE));
-			
+
 			addAPieceToBoard("A1", new Rook(Team.WHITE));
 			addAPieceToBoard("B1", new Knight(Team.WHITE));
 			addAPieceToBoard("C1", new Bishop(Team.WHITE));
@@ -226,7 +226,6 @@ public class Model {
 			addAPieceToBoard("H8", new Rook(Team.BLACK));
 			break;
 		default:
-			throw new NullPointerException("Layout must be set");
 		}
 	}
 

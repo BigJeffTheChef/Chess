@@ -1,11 +1,10 @@
 package view;
 
 import controller.Controller;
+import model.Enums.Layout;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.Enums.Layout;
-import model.Model;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
@@ -18,6 +17,7 @@ public class View extends Application {
 
 	public static void main(String[] args) {
 		Controller.initController(args, Layout.NORMAL);
+		System.out.println("end of main");
 	}
 	
 	///////////////////////////////////////////////////
