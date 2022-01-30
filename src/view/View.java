@@ -1,7 +1,6 @@
 package view;
 
 import controller.Controller;
-import model.Enums.Layout;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
