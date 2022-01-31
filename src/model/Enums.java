@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Color;
+
 public class Enums {
 	public enum Team {
 		BLACK(0, "Black"),
@@ -48,5 +50,31 @@ public class Enums {
 		}
 
 	}
+	
+	public enum Palette {
+		WHITE(Color.decode("#ffffff")),
+		BLUE(Color.decode("#5866ef")),
+		GREEN(Color.decode("3da560")),
+		YELLOW(Color.decode("#f9a62b")),
+		RED(Color.decode("#ec4145")),
+		LILAC(Color.decode("#9b84ec")),
+		CORAL(Color.decode("#f37b68")),
+		TURQUOISE(Color.decode("49ddc1")),
+		GREY(Color.decode("4f5d7e")),
+		PURPLE(Color.decode("583694")),
+		LIGHT_BLUE(Color.decode("09b0f2"));
+		
+		private Color color;
+		
+		private Palette(Color color) {
+			this.color = color;
+		}
+		
+		public Color get() {
+			return this.color;
+		}
+		
+	}
 
 }
+
