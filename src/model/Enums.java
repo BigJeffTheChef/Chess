@@ -37,7 +37,8 @@ public class Enums {
 
 	public enum Layout {
 		NORMAL(8),
-		TESTING(8);
+		TESTING(8),
+		UNIT_TESTS(8);
 
 		private int boardWidth;
 

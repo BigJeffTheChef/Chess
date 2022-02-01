@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
+import java.util.Objects;
 
 import model.Enums.Layout;
 import model.Enums.Team;
@@ -99,7 +100,7 @@ public class Model {
 	 * @return an int[2] representing the board position, e.g. [0,0]
 	 * @throws IllegalArgumentException - if s.length() not 2, if s.charAt(0) not A-Z; if s.charAt(1) not 1-7.
 	 */
-	public int[] convertCoords(String s) {
+	public static int[] convertCoords(String s) {
 		s = s.toUpperCase();
 		return new int[] { s.charAt(1) - 49, s.charAt(0) - 65 };
 	}
@@ -112,8 +113,20 @@ public class Model {
 	 * @return A String representing the board position, e.g. A1
 	 * @throws IllegalArgumentException if c.length not 2; if c[0] not 0-7; if c[1] not 0-7.
 	 */
-	public String convertCoords(int[] c) {
+	public static String convertCoords(int[] c) {
 		return String.format("%c%c", (char) (c[1] + 65), (char) c[0] + 49);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// check if object is same type
+		if (!(obj instanceof Model)) {
+			return false;
+		}
+		// check object has same capture field size and contents
+		//TODO think about the equals method
+
+		return false;
 	}
 
 	///////////////////////////////////////////////////
@@ -141,7 +154,7 @@ public class Model {
 	 * @throws NullPointerException if either argument is null
 	 * @throws IllegalArgumentException if either argument is a blank String (only white space or empty)
 	 */
-	private void setTeamNames(String teamBlackName, String teamWhiteName) throws IllegalArgumentException, NullPointerException {
+	public void setTeamNames(String teamBlackName, String teamWhiteName) throws IllegalArgumentException, NullPointerException {
 		if (teamBlackName == null || teamWhiteName == null) {
 			throw new NullPointerException("Model.setTeamNames(String, String) does not accept null arguments");
 		} else if (teamBlackName.isBlank() || teamWhiteName.isBlank()) {
@@ -225,6 +238,10 @@ public class Model {
 			int[] ti = null;
 			addAPieceToBoard("A1", tp);
 			addAPieceToBoard(ti, new Rook(Team.WHITE));
+			break;
+		case UNIT_TESTS:
+			addAPieceToBoard("E4", new Rook(Team.WHITE));
+			addAPieceToBoard("F5", new Rook(Team.WHITE));
 			break;
 		default:
 		}
