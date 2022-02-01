@@ -27,8 +27,8 @@ public class Controller {
 		try {
 			setModel();
 			setView();
-			View.launchGUI();
 			System.out.println("MVC successfully initialised");
+			View.launchGUI();
 		} catch (InstantiationError e) {
 			System.err.println("Program MVC initialisation not successful");
 			System.err.println(e.getMessage());

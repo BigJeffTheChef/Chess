@@ -82,7 +82,7 @@ public class Model {
 			throw new NullPointerException("Model.addPieceToBoard(String, APiece): String arg may not be null.");
 		} else if (piece == null) {
 			throw new NullPointerException("Model.addPieceToBoard(String, APiece): APiece arg may not be null.");
-		} else if (coord.length() != 2 || coord.charAt(0) < 'A' || coord.charAt(0) > 'H' || coord.charAt(1) < '1' || coord.charAt(1) > '7') {
+		} else if (coord.length() != 2 || coord.charAt(0) < 'A' || coord.charAt(0) > 'H' || coord.charAt(1) < '1' || coord.charAt(1) > '8') {
 			throw new IllegalArgumentException(
 					"Model.addPieceToBoard(String, APiece): String char 0 must only be A-H inclusive and char 1 must only be 1-8 inclusive, but was \""
 							+ coord + "\"");
