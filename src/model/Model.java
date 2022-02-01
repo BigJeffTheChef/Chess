@@ -117,18 +117,6 @@ public class Model {
 		return String.format("%c%c", (char) (c[1] + 65), (char) c[0] + 49);
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		// check if object is same type
-		if (!(obj instanceof Model)) {
-			return false;
-		}
-		// check object has same capture field size and contents
-		//TODO think about the equals method
-
-		return false;
-	}
-
 	///////////////////////////////////////////////////
 	// GETTERS N SETTERS							//
 	/////////////////////////////////////////////////
@@ -240,8 +228,8 @@ public class Model {
 			addAPieceToBoard(ti, new Rook(Team.WHITE));
 			break;
 		case UNIT_TESTS:
-			addAPieceToBoard("E4", new Rook(Team.WHITE));
-			addAPieceToBoard("F5", new Rook(Team.WHITE));
+			addAPieceToBoard(new int[] { 5, 6 }, new Rook(Team.WHITE));
+			addAPieceToBoard(new int[] { 6, 5 }, new Knight(Team.WHITE));
 			break;
 		default:
 		}
