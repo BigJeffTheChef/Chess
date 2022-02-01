@@ -1,0 +1,69 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+* { 
+	-fx-WHITE: "#ffffff";
+	-fx-BLUE: "#5866ef";
+	-fx-GREEN: "3da560";
+	-fx-YELLOW: "#f9a62b";
+	-fx-RED: "#ec4145";
+	-fx-LILAC: "#9b84ec";
+	-fx-CORAL: "#f37b68";
+	-fx-TURQUOISE: "49ddc1";
+	-fx-GREY: "4f5d7e";
+	-fx-PURPLE: "583694";
+	-fx-LIGHT_BLUE: "09b0f2";
+	-fx-DARK_GREY: "2f3136";
+	-fx-NOT_BLACK_YET: "23272a";
+	-fx-BLACK: "000000";
+}
+
+.root {
+	-fx-background-color: -fx-DARK_GREY;
+}
+
+.label {
+	-fx-font-family: Arial;
+	-fx-font-weight: bold;
+	-fx-alignment: center;
+}
+
+#title {
+	-fx-text-fill: -fx-WHITE;
+	-fx-font-size: 30;
+}
+
+.name {
+	-fx-text-fill: -fx-RED;
+	-fx-font-size: 20;
+}
+
+.button {
+	-fx-border-color:-fx-BLACK;
+	-fx-border-wifth: 1 1 1 1;
+	-fx-background-radius: 0;
+	-fx-background-color:-fx-GREY;
+	-fx-text-fill: -fx-BLACK;
+	-fx-background-insets: 0;
+}
+.button:hover {
+	-fx-background-color:-fx-WHITE;
+}
+.button:pressed {
+	-fx-background-color: -fx-YELLOW;
+}
+
+#playButton {
+	-fx-text-fill: -fx-GREEN;
+	-fx-font-weight: bold;
+}
+#playButton:hover {
+	-fx-background-color:-fx-WHITE;
+}
+#playButton:pressed {
+	-fx-background-color:-fx-RED;
+	-fx-text-fill:-fx-BLACK;
+}
+
+
+
+
+
