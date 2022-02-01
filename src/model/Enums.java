@@ -76,6 +76,22 @@ public class Enums {
 		}
 		
 	}
+	
+	public enum StoredStrings {
+		PLAYER_1_NAME("Black Name Unset"),
+		PLAYER_2_NAME("White Name Unset");
+		
+		private String name;
+		
+		private StoredStrings(String name) {
+			this.name = name;
+		}
+		
+		@Override
+		public String toString() {
+			return this.name;
+		}
+	}
 
 }
 

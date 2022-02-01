@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import junit.framework.AssertionFailedError;
 import model.Enums.Layout;
+import model.Enums.StoredStrings;
 import model.Enums.Team;
 import model.pieces.APiece;
 import model.pieces.Bishop;
@@ -27,24 +28,103 @@ class TestModel {
 
 	private Model model;
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-	}
-
 	@BeforeEach
 	void setUp() throws Exception {
 		model = new Model(Layout.UNIT_TESTS);
 	}
 
-	// Constructor
+	///////////////////////
+	// Constructor		//
+	/////////////////////
 
-	@Disabled
 	@Test
 	void testModel() {
+		assertEquals(Layout.UNIT_TESTS, model.getLayout());
+	}
+
+	///////////////////////
+	// Gets n Sets		//
+	/////////////////////
+
+	// captured field
+
+	@Disabled @Test
+	void testGetCaptured() {
 		fail("Not yet implemented");
 	}
 
-	// convertCoords() overloaded methods
+	// teamNames field
+	
+	@Test
+	void testGetSetTeamNames_Valid() {
+		String[] expected, actual;
+		expected = new String[] { StoredStrings.PLAYER_1_NAME.toString(), StoredStrings.PLAYER_2_NAME.toString() };
+		actual = model.getTeamNames();
+		assertArrayEquals(expected, actual);
+		
+		String team1ExpectedName = "Black Team Re-set";
+		String team2ExceptedName = "White Team Re-set";
+		model.setTeamNames(team1ExpectedName, team2ExceptedName);
+		expected = new String[] { team1ExpectedName, team2ExceptedName };
+		actual = model.getTeamNames();
+		assertArrayEquals(expected, actual);
+	}
+	
+	@Test
+	void testSetTeamNames_Inalid() {
+		assertThrows(IllegalArgumentException.class, ()->{
+			model.setTeamNames("", "A Name");
+		});
+		assertThrows(IllegalArgumentException.class, ()->{
+			model.setTeamNames("A Name", "");
+		});
+		assertThrows(NullPointerException.class, ()->{
+			model.setTeamNames(null, "A Name");
+		});
+		assertThrows(NullPointerException.class, ()->{
+			model.setTeamNames("A Name", null);
+		});
+	}
+
+	// layout field
+	
+	@Test
+	void testGetLayout() {
+		assertEquals(Layout.UNIT_TESTS, model.getLayout());
+	}
+
+	// board field
+	
+	@Test
+	void testGetBoard() {
+		Hashtable<String, APiece> actualBoard = model.getBoard();
+		Hashtable<String, APiece> expectedBoard = new Hashtable<String, APiece>(32);
+		expectedBoard.put("F6", new Rook(Team.WHITE));
+		expectedBoard.put("D7", new Knight(Team.WHITE));
+
+		// check sizes are equal
+		int expectedSize = expectedBoard.size();
+		int actualSize = model.getBoard().size();
+		assertEquals(expectedSize, actualSize);
+
+		Iterator<String> keys = expectedBoard.keySet().iterator();
+
+		while (keys.hasNext()) {
+			String key = keys.next();
+			String expectedPieceRepresentation = String.valueOf(expectedBoard.get(key));
+			String actualPieceRepresentation = String.valueOf(actualBoard.get(key));
+			if (!expectedPieceRepresentation.equals(actualPieceRepresentation)) {
+				fail("expected \"" + expectedPieceRepresentation + "\" but was \"" + actualPieceRepresentation + "\"");
+			}
+		}
+
+	}
+
+	///////////////////////
+	// Methods			//
+	/////////////////////
+
+	// convertCoords()
 
 	@Test
 	void testConvertCoords_StringToIntArray() {
@@ -78,70 +158,6 @@ class TestModel {
 		expected = "F4";
 		actual = Model.convertCoords(new int[] { 3, 5 });
 		assertEquals(expected, actual);
-	}
-
-	// getCaptured()
-
-	@Test
-	void testGetCaptured() {
-		fail("Not yet implemented");
-	}
-
-	// getTeamNames()
-
-	@Test
-	void testGetTeamNames() {
-		String[] expected, actual;
-
-		expected = new String[] { "Black Name Unset", "White Name Unset" };
-		actual = model.getTeamNames();
-		assertArrayEquals(expected, actual);
-	}
-
-	// setTeamNames()
-
-	@Test
-	void testSetTeamNames() {
-		model.setTeamNames("Black Team Re-set", "White Team Re-set");
-		String[] expected = new String[] { "Black Team Re-set", "White Team Re-set" };
-		String[] actual = model.getTeamNames();
-		assertArrayEquals(expected, actual);
-	}
-
-	// getLayout()
-
-	@Test
-	void testGetLayout() {
-		Layout actual, expected;
-		expected = Layout.UNIT_TESTS;
-		actual = model.getLayout();
-		assertEquals(expected, actual);
-	}
-
-	@Test
-	void testGetBoard() {
-		Hashtable<String, APiece> actualBoard = model.getBoard();
-		Hashtable<String, APiece> expectBoard = new Hashtable<String, APiece>(32);
-		expectBoard.put("F6", new Rook(Team.WHITE));
-		expectBoard.put("D7", new Knight(Team.WHITE));
-
-
-		// check sizes are equal
-		int expectedSize = expectBoard.size();
-		int actualSize = model.getBoard().size();
-		assertEquals(expectedSize, actualSize);
-
-		Iterator<String> keys = expectBoard.keySet().iterator();
-
-		while (keys.hasNext()) {
-			String key = keys.next();
-			APiece expectedPiece = expectBoard.get(key);
-			APiece actualPiece = actualBoard.get(key);
-			if (!expectedPiece.pieceTypeToString().equals(actualPiece.pieceTypeToString())) {
-				fail("expected=\"" + expectedPiece.pieceTypeToString() + "\", actual=\"" + actualPiece.pieceTypeToString() + "\"");
-			}
-		}
-
 	}
 
 }

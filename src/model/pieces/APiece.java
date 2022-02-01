@@ -82,11 +82,12 @@ public abstract class APiece {
 		this.uniqueID = ++counterID;
 	}
 
-	public String toString() {
+	public String toStringUnique() {
 		return "Team=" + this.team + " Type=" + this.type + " uniqueID=" + this.uniqueID;
 	}
 	
-	public String pieceTypeToString() {
+	@Override
+	public String toString() {
 		return "Team=" + this.team + " Type=" + this.type;
 	}
 }
