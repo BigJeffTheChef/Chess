@@ -120,10 +120,10 @@ class TestModel {
 
 	@Test
 	void testGetBoard() {
-		Hashtable<int[], APiece> actualBoard = model.getBoard();
-		Hashtable<int[], APiece> expectBoard = new Hashtable<int[], APiece>(32);
-		expectBoard.put(new int[] { 5, 6 }, new Rook(Team.WHITE));
-		expectBoard.put(new int[] { 6, 5 }, new Knight(Team.WHITE));
+		Hashtable<String, APiece> actualBoard = model.getBoard();
+		Hashtable<String, APiece> expectBoard = new Hashtable<String, APiece>(32);
+		expectBoard.put("F6", new Rook(Team.WHITE));
+		expectBoard.put("D7", new Knight(Team.WHITE));
 
 
 		// check sizes are equal
@@ -131,76 +131,16 @@ class TestModel {
 		int actualSize = model.getBoard().size();
 		assertEquals(expectedSize, actualSize);
 
-		//		Iterator<int[]> expectedKeys = expectBoard.keySet().iterator();
-		//		Iterator<int[]> actualKeys = actualBoard.keySet().iterator();
-		Object[] keys = expectBoard.keySet().toArray();
-		Object[] keys2 = actualBoard.keySet().toArray();
-		
-		for (int i = 0; i < keys.length && i < keys2.length; i++) {
-			System.out.println(Arrays.toString((int[]) keys[i]));
-			System.out.println(Arrays.toString((int[]) keys2[i]));
+		Iterator<String> keys = expectBoard.keySet().iterator();
+
+		while (keys.hasNext()) {
+			String key = keys.next();
+			APiece expectedPiece = expectBoard.get(key);
+			APiece actualPiece = actualBoard.get(key);
+			if (!expectedPiece.pieceTypeToString().equals(actualPiece.pieceTypeToString())) {
+				fail("expected=\"" + expectedPiece.pieceTypeToString() + "\", actual=\"" + actualPiece.pieceTypeToString() + "\"");
+			}
 		}
-		
-//		for (int i = 0; i < keys.length; i++) {
-//			int[] key = (int[]) keys[i];
-//			System.out.println(Arrays.toString(key));
-//			System.out.println(expectBoard.get(key).toString());
-//			System.out.println(actualBoard.get(key).toString());
-//		}
-
-
-		//		for (int i = 0; expectedKeys.hasNext(); i++) {
-		//			int[] e = expectedKeys.next();
-		////			int[] a = actualKeys.next();
-		////			if (!Arrays.toString(a).equals(Arrays.toString(e))) {
-		////				System.out.println("not equal!");
-		////			}
-		//			
-		//			
-		//			System.out.println(expectBoard.get(Arrays.copyOf(e, e.length)));
-		//			System.out.println(actualBoard.get(Arrays.copyOf(e, e.length)));
-		//			System.out.println("-----");
-		//		}
-		//		for (int[] key : expectBoard.keySet()) {
-		//			System.out.println("key " + Arrays.toString(key));
-		//			System.out.println("value " + expectBoard.get(key));
-		//		}
-		//		System.out.println("---");
-		//		for (int[] key : actualBoard.keySet()) {
-		//			System.out.println("key " + Arrays.toString(key));
-		//			System.out.println("value " + actualBoard.get(key));
-		//		}
-		//		System.out.println("-----------------------------------");
-		//
-		//		for (int[] key : expectBoard.keySet()) {
-		//			System.out.println("key " + Arrays.toString(key));
-		//			System.out.println("expected value: " + expectBoard.get(key));
-		//			System.out.println("actual value: " + actualBoard.get(key));
-		//
-		//		}
-
-		//		// check key:value pairs are equal
-		//		for (int[] key : expectBoard.keySet()) {
-		//			// get the APieces
-		//			APiece expectedPiece = expectBoard.get(key);
-		//			APiece actualPiece = actualBoard.get(key);
-		//			System.out.println(Arrays.toString(key));
-		//			// if either is null then something has went wrong for sure
-		//			if (expectedPiece == null || actualPiece == null) {
-		//				fail("One of or both of the APiece's was null! expectedPiece=" + expectedPiece + ", actualPiece=" + actualPiece);
-		//			}
-		//
-		//			// get a non-unique string representation of each APiece
-		//			String expectedStr = expectedPiece.pieceTypeToString();
-		//			String actualStr = actualPiece.pieceTypeToString();
-		//			if (!expectedStr.equals(actualStr)) {
-		//				fail("values's of key " + Arrays.toString(key) + " were not equal [expected=" + expectBoard.get(key) + ", actual="
-		//						+ actualBoard.get(key));
-		//			}
-		//		}
-
-		//assertEquals(expectBoard, model.getBoard());
-		//assertSame(testBoard, model.getBoard());
 
 	}
 

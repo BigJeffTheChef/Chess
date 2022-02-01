@@ -83,10 +83,10 @@ public abstract class APiece {
 	}
 
 	public String toString() {
-		return "Team=" + this.team + " Type=" + this.type;
+		return "Team=" + this.team + " Type=" + this.type + " uniqueID=" + this.uniqueID;
 	}
 	
 	public String pieceTypeToString() {
-		return "Team=" + this.team + " Type=" + this.type + " uniqueID=" + this.uniqueID;
+		return "Team=" + this.team + " Type=" + this.type;
 	}
 }

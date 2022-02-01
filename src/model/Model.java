@@ -11,7 +11,7 @@ import model.pieces.*;
 
 public class Model {
 	//TODO make a sing;eton?
-	private Hashtable<int[], APiece> board;
+	private Hashtable<String, APiece> board;
 	private ArrayList<APiece> captured;
 	private Layout layout;
 	private String[] teamNames;
@@ -68,15 +68,7 @@ public class Model {
 	 * @throw NullPointerException if piece or coord arguments are null
 	 */
 	private void addAPieceToBoard(int[] coord, APiece piece) throws IllegalArgumentException, NullPointerException {
-		if (coord == null) {
-			throw new NullPointerException("Model.addPieceToBoard(int[], APiece): int[] arg may not be null.");
-		} else if (piece == null) {
-			throw new NullPointerException("Model.addPieceToBoard(int[], APiece): APiece arg may not be null.");
-		} else if (coord.length != 2 || coord[0] < 0 || coord[0] > 7 || coord[1] < 0 || coord[1] > 7) {
-			throw new IllegalArgumentException(
-					"Model.addPieceToBoard(int[], APiece): int[] elements must only be 0-7 inclusive, but was " + Arrays.toString(coord));
-		}
-		board.put(coord, piece);
+		addAPieceToBoard(convertCoords(coord), piece);
 	}
 
 	/**
@@ -85,7 +77,17 @@ public class Model {
 	 * @param piece - an APiece object
 	 */
 	private void addAPieceToBoard(String coord, APiece piece) throws IllegalArgumentException, NullPointerException {
-		addAPieceToBoard(convertCoords(coord), piece);
+		//addAPieceToBoard(convertCoords(coord), piece);
+		if (coord == null) {
+			throw new NullPointerException("Model.addPieceToBoard(String, APiece): String arg may not be null.");
+		} else if (piece == null) {
+			throw new NullPointerException("Model.addPieceToBoard(String, APiece): APiece arg may not be null.");
+		} else if (coord.length() != 2 || coord.charAt(0) < 'A' || coord.charAt(0) > 'H' || coord.charAt(1) < '1' || coord.charAt(1) > '7') {
+			throw new IllegalArgumentException(
+					"Model.addPieceToBoard(String, APiece): String char 0 must only be A-H inclusive and char 1 must only be 1-8 inclusive, but was \""
+							+ coord + "\"");
+		}
+		board.put(coord, piece);
 	}
 
 	///////////////////////////////////////////////////
@@ -174,7 +176,7 @@ public class Model {
 	/**
 	 * @return a {@code Hashtable<String, APiece>} containing all the {@code APiece}'s positions
 	 */
-	public Hashtable<int[], APiece> getBoard() {
+	public Hashtable<String, APiece> getBoard() {
 		return this.board;
 	}
 
@@ -183,7 +185,7 @@ public class Model {
 	 * @param setup
 	 */
 	private void setBoard() {
-		board = new Hashtable<int[], APiece>(32);
+		board = new Hashtable<String, APiece>(32);
 		switch (this.layout) {
 		case NORMAL:
 			addAPieceToBoard("A1", new Rook(Team.WHITE));
@@ -228,8 +230,8 @@ public class Model {
 			addAPieceToBoard(ti, new Rook(Team.WHITE));
 			break;
 		case UNIT_TESTS:
-			addAPieceToBoard(new int[] { 5, 6 }, new Rook(Team.WHITE));
-			addAPieceToBoard(new int[] { 6, 5 }, new Knight(Team.WHITE));
+			addAPieceToBoard("F6", new Rook(Team.WHITE));
+			addAPieceToBoard("D7", new Knight(Team.WHITE));
 			break;
 		default:
 		}
