@@ -1,6 +1,6 @@
 package controller;
 
-import model.Enums.Layout;
+import model.ModelEnums.Layout;
 import model.Model;
 import view.View;
 

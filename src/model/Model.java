@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Objects;
 
-import model.Enums.Layout;
-import model.Enums.StoredStrings;
-import model.Enums.Team;
+import model.ModelEnums.Layout;
+import model.ModelEnums.StoredStrings;
+import model.ModelEnums.Team;
 import model.pieces.*;
 
 public class Model {
@@ -229,6 +229,8 @@ public class Model {
 			addAPieceToBoard("G1", new Knight(Team.WHITE));
 			addAPieceToBoard("H1", new Rook(Team.WHITE));
 
+			System.out.println(Team.WHITE.getTeamName());
+			
 			addAPieceToBoard("A2", new Pawn(Team.WHITE));
 			addAPieceToBoard("B2", new Pawn(Team.WHITE));
 			addAPieceToBoard("C2", new Pawn(Team.WHITE));

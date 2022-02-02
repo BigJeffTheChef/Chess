@@ -2,7 +2,7 @@ package model;
 
 import java.awt.Color;
 
-public class Enums {
+public class ModelEnums {
 	public enum Team {
 		BLACK(0, "Black"),
 		WHITE(1, "White");

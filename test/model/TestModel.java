@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import junit.framework.AssertionFailedError;
-import model.Enums.Layout;
-import model.Enums.StoredStrings;
-import model.Enums.Team;
+import model.ModelEnums.Layout;
+import model.ModelEnums.StoredStrings;
+import model.ModelEnums.Team;
 import model.pieces.APiece;
 import model.pieces.Bishop;
 import model.pieces.King;

@@ -1,8 +1,8 @@
 package model.pieces;
 
-import model.Enums;
-import model.Enums.Team;
-import model.Enums.Type;
+import model.ModelEnums;
+import model.ModelEnums.Team;
+import model.ModelEnums.Type;
 
 public class Knight extends APiece {
 

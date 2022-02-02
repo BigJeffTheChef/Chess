@@ -1,10 +1,26 @@
 package view.scenes.introByHand;
 
-public class Driver {
+import javafx.application.Application;
+import javafx.scene.Parent;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class Driver extends Application {
+
+	private Introduction i;
 
 	public static void main(String[] args) {
+
+		launch(args);
+	}
+
+	@Override
+	public void start(Stage stage) throws Exception {
 		// TODO Auto-generated method stub
-		IntroByHand i = new IntroByHand();
+		i = new Introduction();
+		stage.setScene(i);
+		stage.show();
+
 	}
 
 }
