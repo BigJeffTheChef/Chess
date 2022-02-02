@@ -1,0 +1,54 @@
+.label {
+	-fx-font-family: Arial;
+	-fx-font-weight: bold;
+	-fx-alignment: center;
+}
+
+#title {
+	-fx-text-fill: -fx-WHITE;
+	-fx-font-size: 30;
+}
+
+.name {
+	-fx-text-fill: -fx-RED;
+	-fx-font-size: 20;
+}
+
+.button {
+	-fx-border-color: -fx-BLACK;
+	-fx-border-wifth: 1 1 1 1;
+	-fx-background-radius: 0;
+	-fx-background-color: -fx-GREY;
+	-fx-text-fill: -fx-BLACK;
+	-fx-background-insets: 0;
+}
+
+#introPane {
+	-fx-background-image: url("../../../../ChessImage2square.jpeg");
+	-fx-bg-position: center;
+	-fx-background-size: 100%;
+	-fx-background-repeat: no-repeat;
+}
+.menuButton:hover {
+	-fx-background-color: -fx-WHITE;
+}
+
+.menuButton:pressed {
+	-fx-background-color: -fx-YELLOW;
+}
+
+.menuVBox {
+	-fx-alignment: center;
+}
+
+/*.playButton {
+	-fx-text-fill: -fx-GREEN;
+	-fx-font-weight: bold;
+}
+.playButton:hover {
+	-fx-background-color:-fx-WHITE;
+}
+.playButton:pressed {
+	-fx-background-color:-fx-RED;
+	-fx-text-fill:-fx-BLACK;
+}*/

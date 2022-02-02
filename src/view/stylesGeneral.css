@@ -1,0 +1,20 @@
+* {
+	-fx-WHITE: "#ffffff";
+	-fx-BLUE: "#5866ef";
+	-fx-GREEN: "3da560";
+	-fx-YELLOW: "#f9a62b";
+	-fx-RED: "#ec4145";
+	-fx-LILAC: "#9b84ec";
+	-fx-CORAL: "#f37b68";
+	-fx-TURQUOISE: "49ddc1";
+	-fx-GREY: "4f5d7e";
+	-fx-PURPLE: "583694";
+	-fx-LIGHT_BLUE: "09b0f2";
+	-fx-DARK_GREY: "2f3136";
+	-fx-NOT_BLACK_YET: "23272a";
+	-fx-BLACK: "000000";
+}
+
+.root {
+	-fx-background-color: -fx-DARK_GREY;
+}
