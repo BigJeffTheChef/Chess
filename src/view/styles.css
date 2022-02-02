@@ -44,21 +44,28 @@
 	-fx-text-fill: -fx-BLACK;
 	-fx-background-insets: 0;
 }
-.button:hover {
+
+#introVBox {
+	-fx-background-image: url("../../ChessImage2square.jpeg");
+	-fx-bg-position: center;
+	-fx-background-size: 100%;
+	-fx-background-repeat: no-repeat;
+}
+#menuButton:hover {
 	-fx-background-color:-fx-WHITE;
 }
-.button:pressed {
+#menuButton:pressed {
 	-fx-background-color: -fx-YELLOW;
 }
 
-#playButton {
+.playButton {
 	-fx-text-fill: -fx-GREEN;
 	-fx-font-weight: bold;
 }
-#playButton:hover {
+.playButton:hover {
 	-fx-background-color:-fx-WHITE;
 }
-#playButton:pressed {
+.playButton:pressed {
 	-fx-background-color:-fx-RED;
 	-fx-text-fill:-fx-BLACK;
 }

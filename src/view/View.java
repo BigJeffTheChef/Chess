@@ -43,7 +43,7 @@ public class View extends Application {
 	public void start(Stage stage) throws Exception {
 		System.out.println("start() called");
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("introduction.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("Introduction.fxml"));
 			Scene scene = new Scene(root, 600, 600);
 			scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 			stage.setResizable(false);
