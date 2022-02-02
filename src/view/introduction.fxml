@@ -46,7 +46,7 @@
             <Button mnemonicParsing="false" prefWidth="100.0" styleClass="menuButtons" text="Options" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" prefWidth="100.0" styleClass="menuButtons" text="Load Game" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quit" prefWidth="100.0" styleClass="menuButtons" text="Quit" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" prefWidth="100.0" styleClass="menuButtons" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" prefWidth="100.0" styleClass="menuButtons" text="Credits" GridPane.columnIndex="3" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </children>
