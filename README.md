@@ -6,4 +6,6 @@
 
 This is a local 1v1 version of Chess
 
-It's just a console printed version of the game, and it won't get finished until I'm finished with Checkers @ https://github.com/BigJeffTheChef/Checkers
+It is implemented with an MVC structure using JavaFX for the GUI.
+
+JavaFX you are amazing, but also burn in hell xD
