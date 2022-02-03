@@ -1,15 +1,14 @@
 package view;
 
 import controller.Controller;
+import view.scenes.introduction.Introduction;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+
 
 
 public class View extends Application {
@@ -40,23 +39,11 @@ public class View extends Application {
 	 * Initialise the GUI
 	 */
 	@Override
-	public void start(Stage stage) throws Exception {
+	public void start(Stage introStage) throws Exception {
 		System.out.println("start() called");
-		try {
-			Parent root = FXMLLoader.load(getClass().getResource("scenes/introduction/introduction.fxml"));
-			Scene scene = new Scene(root, 600, 600);
-			scene.getStylesheets().add(getClass().getResource("stylesGeneral.css").toExternalForm());
-			scene.getStylesheets().add(getClass().getResource("scenes/introduction/introductionStyles.css").toExternalForm());
-			stage.setResizable(false);
-			stage.setOnCloseRequest(event -> {
-				quit(stage);
-				event.consume();
-			});
-			stage.setScene(scene);
-			stage.show();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		introStage = new Introduction();
+		introStage.show();
+
 	}
 	
 	/**

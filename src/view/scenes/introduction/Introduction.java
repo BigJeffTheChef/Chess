@@ -1,4 +1,4 @@
-package view.scenes.introByHand;
+package view.scenes.introduction;
 
 import java.awt.Color;
 
