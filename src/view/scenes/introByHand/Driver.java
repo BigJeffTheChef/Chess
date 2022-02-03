@@ -17,8 +17,7 @@ public class Driver extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		// TODO Auto-generated method stub
-		i = new Introduction();
-		stage.setScene(i);
+		stage = new Introduction();
 		stage.show();
 
 	}

@@ -25,40 +25,66 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 import view.ViewEnums.Dimensions;
 import view.ViewEnums.Palette;
 
-public class Introduction extends Scene {
+/**
+ * Creates a custom stage object configured to be the introduction screen of my Chess program
+ * @author Peter Marley
+ * @StudentNum 13404067
+ * @email pmarley03@qub.ac.uk
+ * @GitHub BigJeffTheChef
+ *
+ */
+public class Introduction extends Stage {
+
+	private Scene scene;
+	private Parent root;
 
 	private VBox panelTop;
 	private Pane panelMid;
 	private HBox panelBottom;
+
+	private Background bgImage;
+
+	public Introduction() {
+		super();
+		this.setBackground("./ChessImage2square.jpeg");
+		this.setPanelTop();
+		this.setPanelMid();
+		this.setPanelBottom();
+		this.setRoot();
+		this.createMyScene();
+		this.setScene(scene);
+
+	}
 	
-	private BackgroundImage bgImage;
+	/**
+	 * Create the scene, adding the root, and specifying dimensions
+	 */
+	private void createMyScene() {
+		this.scene = new Scene(root, Dimensions.INTRO_WINDOW.getWidth(), Dimensions.INTRO_WINDOW.getHeight());
+	}
 
-	//private static VBox root = getMyRoot();
-
-	private static VBox getMyRoot() {
-		VBox root = new VBox();
-		root.getChildren().add(getPanelTop());
-		root.setBackground(new Background(new BackgroundFill(Palette.DARK_GREY.get(), CornerRadii.EMPTY, Insets.EMPTY)));
-		root.setPrefHeight(Dimensions.INTRO_WINDOW.getHeight());
-		root.setPrefWidth(Dimensions.INTRO_WINDOW.getWidth());
-		BackgroundImage bgBgImage = new BackgroundImage(bgImage, 
-				BackgroundRepeat.NO_REPEAT, 
+	/**
+	 * create a Background object for the root
+	 * @param file A String representing the filepath relative to project root directory
+	 */
+	private void setBackground(String file) {
+		BackgroundImage bgImage = new BackgroundImage(new Image("file:./" + file),
+				BackgroundRepeat.NO_REPEAT,
 				BackgroundRepeat.NO_REPEAT,
 				BackgroundPosition.CENTER,
 				BackgroundSize.DEFAULT);
-		Background bg = new Background(bgBgImage);
-		root.setBackground(bg);
-		return root;
+		this.bgImage = new Background(bgImage);
+
 	}
 
-	public Introduction() {
-		super(getMyRoot());
-	}
-
-	private static VBox getPanelTop() {
+	/**
+	 * Instantiate and configure the top panel of Chess Introduction Stage. Contains program title and my name
+	 */
+	private void setPanelTop() {
 		Label[] name = new Label[] { new Label("Chess!"), new Label("by"), new Label("Peter Marley") };
 		for (int i = 0; i < name.length; i++) {
 			name[i].setBorder(new Border(
@@ -68,7 +94,7 @@ public class Introduction extends Scene {
 			name[i].setAlignment(Pos.CENTER);
 
 		}
-		
+
 		name[0].setTextFill(Palette.RED.get());
 		name[0].setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		name[1].setTextFill(Palette.WHITE.get());
@@ -77,22 +103,35 @@ public class Introduction extends Scene {
 		name[2].setFont(Font.font("Arial", FontWeight.BOLD, 20));
 
 
-		VBox panel = new VBox(3);
-		panel.setAlignment(Pos.CENTER);
-		panel.setPrefHeight(300);
-		panel.setPrefWidth(300);
-		;
-		panel.setFillWidth(true);
-		panel.getChildren().addAll(name[0], name[1], name[2]);
-		return panel;
+		panelTop = new VBox(3);
+		panelTop.setAlignment(Pos.CENTER);
+		panelTop.setPrefHeight(120);
+		panelTop.setPrefWidth(300);
+		panelTop.setFillWidth(true);
+		panelTop.getChildren().addAll(name[0], name[1], name[2]);
 	}
 
-	private Pane getPanelMid() {
-		return null;
+	/**
+	 * Instantiate and configure the root VBox for this stage
+	 */
+	private void setRoot() {
+		VBox root = new VBox();
+		root.getChildren().addAll(panelTop, panelMid, panelBottom);
+		root.setBackground(new Background(new BackgroundFill(Palette.DARK_GREY.get(), CornerRadii.EMPTY, Insets.EMPTY)));
+		root.setPrefHeight(Dimensions.INTRO_WINDOW.getHeight());
+		root.setPrefWidth(Dimensions.INTRO_WINDOW.getWidth());
+		root.setBackground(bgImage);
+		this.root = root;
 	}
 
-	private HBox getPanelBottom() {
-		return null;
+
+	private void setPanelMid() {
+		panelMid = new Pane();
 	}
+
+	private void setPanelBottom() {
+		panelBottom = new HBox();
+	}
+
 
 }
