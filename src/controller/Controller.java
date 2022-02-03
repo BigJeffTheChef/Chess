@@ -17,15 +17,13 @@ public class Controller {
 	private static Model model;
 	private static View view;
 	
-	private static final Layout LAYOUT = Layout.NORMAL;
-
 	///////////////////////////////////////////////////
 	// CONSTRUCTOR									//
 	/////////////////////////////////////////////////
 
 	public static void initController() {
 		try {
-			setModel();
+			setModel(Layout.NORMAL);
 			setView();
 			System.out.println("MVC successfully initialised");
 			View.launchGUI();
@@ -49,8 +47,8 @@ public class Controller {
 	/**
 	 * @param m the m to set
 	 */
-	private static void setModel() {
-		model = new Model(LAYOUT);
+	private static void setModel(Layout layout) {
+		model = new Model(layout);
 	}
 
 	/**
