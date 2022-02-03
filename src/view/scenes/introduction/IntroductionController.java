@@ -22,7 +22,7 @@ public class IntroductionController {
 		alert.setTitle("Quit");
 		alert.setHeaderText("You are about to quit!");
 		alert.setContentText("Are you sure?");
-		if (alert.showAndWait().asPaint() == ButtonType.OK) {
+		if (alert.showAndWait().get() == ButtonType.OK) {
 			stage = (Stage) introductionPane.getScene().getWindow();
 			stage.close();
 		}
