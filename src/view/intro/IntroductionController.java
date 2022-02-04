@@ -1,7 +1,10 @@
-package view.scenes.introduction;
+package view.intro;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -29,7 +32,9 @@ public class IntroductionController {
 	}
 	
 	public void options() {
-		//TODO options button in intro screen
+		Stage s = new Stage();
+		Scene sc = new Scene(new Group());
+		s.show();
 	}
 	
 	public void play() {

@@ -1,10 +1,9 @@
 package view;
 
 import controller.Controller;
-import view.scenes.introduction.Introduction;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
+import view.intro.Introduction;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;

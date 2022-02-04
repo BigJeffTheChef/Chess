@@ -1,4 +1,4 @@
-package view.scenes.introduction;
+package view.intro;
 
 import java.io.IOException;
 
@@ -19,47 +19,42 @@ import javafx.stage.Stage;
 import view.View;
 
 public class Introduction extends Stage {
-	
+
 	private VBox root;
 	private Scene scene;
-	private Background background;
 
 	public Introduction() throws IOException {
 		this.createRoot();
-		this.createBackground("./ChessImage2square.jpeg");
 		this.createScene();
-		this.setOnCloseRequest(event -> {
-			View.quit(this);
-			event.consume();
-		});
+		this.defineCloseBehaviour();
 		this.setScene(scene);
 	}
 
 	/**
 	 * Create root node of this Introduction object
+	 * 
 	 * @throws IOException
 	 */
 	private void createRoot() throws IOException {
-		root = FXMLLoader.load(getClass().getResource("introduction.fxml"));
-		root.setBackground(background);
+		root = FXMLLoader.load(getClass().getResource("Introduction.fxml"));
 	}
 
-	private void createBackground(String file) {
-		Image image = new Image("file:./" + file);
-		BackgroundImage bgImage = new BackgroundImage(image,
-				BackgroundRepeat.NO_REPEAT,
-				BackgroundRepeat.NO_REPEAT,
-				BackgroundPosition.CENTER,
-				BackgroundSize.DEFAULT);
-		background = new Background(bgImage);
-	}
-
-
-
+	/**
+	 * Create the scene of this Introduction object
+	 */
 	private void createScene() {
 		scene = new Scene(root, 600, 600);
-		scene.getStylesheets().add(getClass().getResource("../../stylesGeneral.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("../stylesGeneral.css").toExternalForm());
 		scene.getStylesheets().add(getClass().getResource("introductionStyles.css").toExternalForm());
 	}
 
+	/**
+	 * Define close behaviour of this Introduction object
+	 */
+	private void defineCloseBehaviour() {
+		this.setOnCloseRequest(event -> {
+			View.quit(this);
+			event.consume();
+		});
+	}
 }

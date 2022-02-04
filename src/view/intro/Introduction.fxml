@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="introPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.intro.IntroductionController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Label fx:id="title" alignment="CENTER" prefHeight="18.0" prefWidth="600.0" text="Chess!" />
+            <Label alignment="CENTER" prefHeight="18.0" prefWidth="654.0" styleClass="name" text="by" />
+            <Label alignment="CENTER" prefHeight="18.0" prefWidth="606.0" styleClass="name" text="Peter Marley" />
+            <Pane prefHeight="16.0" prefWidth="600.0" />
+         </children>
+      </VBox>
+      <Pane prefHeight="200.0" prefWidth="200.0" />
+      <HBox prefHeight="200.0" prefWidth="600.0">
+         <children>
+            <VBox minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" styleClass="menuVBox">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#play" prefWidth="100.0" styleClass="menuButton" text="Play!" />
+               </children>
+            </VBox>
+            <VBox minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" styleClass="menuVBox">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#options" prefWidth="100.0" styleClass="menuButton" text="Options" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

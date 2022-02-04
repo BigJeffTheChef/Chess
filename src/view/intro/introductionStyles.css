@@ -24,7 +24,7 @@
 }
 
 #introPane {
-	-fx-background-image: url("../../../../ChessImage2square.jpeg");
+	-fx-background-image: url("../../../ChessImage2square.jpeg");
 	-fx-bg-position: center;
 	-fx-background-size: 100%;
 	-fx-background-repeat: no-repeat;
