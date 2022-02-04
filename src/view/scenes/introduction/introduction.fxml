@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="introPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="introPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.scenes.introduction.IntroductionController">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -21,12 +21,12 @@
          <children>
             <VBox minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" styleClass="menuVBox">
                <children>
-                  <Button mnemonicParsing="false" styleClass="menuButton" text="Play!" />
+                  <Button mnemonicParsing="false" onAction="#play" prefWidth="100.0" styleClass="menuButton" text="Play!" />
                </children>
             </VBox>
             <VBox minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" styleClass="menuVBox">
                <children>
-                  <Button mnemonicParsing="false" styleClass="menuButton" text="Play!" />
+                  <Button mnemonicParsing="false" onAction="#options" prefWidth="100.0" styleClass="menuButton" text="Options" />
                </children>
             </VBox>
          </children>

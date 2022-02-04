@@ -27,4 +27,12 @@ public class IntroductionController {
 			stage.close();
 		}
 	}
+	
+	public void options() {
+		//TODO options button in intro screen
+	}
+	
+	public void play() {
+		//TODO play button in intro screen
+	}
 }

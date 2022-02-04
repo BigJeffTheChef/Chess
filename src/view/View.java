@@ -9,8 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 
-
-
 public class View extends Application {
 
 	///////////////////////////////////////////////////
@@ -21,11 +19,11 @@ public class View extends Application {
 		Controller.initController();
 		System.out.println("Goodbye! End of main()");
 	}
-	
+
 	///////////////////////////////////////////////////
-	// Application launch()							//
+	// Application launch() & start()				//
 	/////////////////////////////////////////////////
-	
+
 	/**
 	 * A static method that allows the Controller to control execution.
 	 * Controller ensures the Model has been created successfully, or forces
@@ -43,14 +41,18 @@ public class View extends Application {
 		System.out.println("start() called");
 		introStage = new Introduction();
 		introStage.show();
-
 	}
-	
+
+	///////////////////////////////////////////////////
+	// Methods										//
+	/////////////////////////////////////////////////
+
 	/**
-	 * Quit the game with a confirmation alert
+	 * Quit the game with a confirmation alert - theoretically any stage can call this static method
+	 * 
 	 * @param stage The stage to quit from
 	 */
-	public void quit(Stage stage) {
+	public static void quit(Stage stage) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Quit");
 		alert.setHeaderText("You are about to quit!");
